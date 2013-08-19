@@ -403,8 +403,23 @@ class DrawingLayer:
         """
         #TODO Maybe include all paramaters for text over here, if required
         self._shapes.append(Text(text,location, color, size, "", False, False, False, 255,bgColor))
+
+    def renderToOtherLayer(self, layer):
+        """
+        Add this layer to another layer.
+
+        Parameters:
+            * *layer* - layer
+        """
+        if not isinstance(layer, DrawingLayer):
+            return "Please pass a DrawingLayer object"
+        shapes = self._shapes()
+        for s in shapes:
+            layer._shapes.append(s)
+        
+
+
+
     
     
-    
-    
-    #TODO rotatedrectangle
+    #todo renderToOtherLayer()
