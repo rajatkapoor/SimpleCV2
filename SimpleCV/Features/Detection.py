@@ -1005,7 +1005,7 @@ class Circle(Feature):
 
 
 
-    def draw(self, color = Color.GREEN,width=1,antialias=True,alpha = 255):
+    def draw(self, color = Color.GREEN,width=1,filled  = False, antialias=True,alpha = 255):
         """
         **SUMMARY**
 
@@ -1022,7 +1022,7 @@ class Circle(Feature):
         Nothing - this is an inplace operation that modifies the source images drawing layer.
 
         """
-        self.image.dl().circle((self.x,self.y),self.r,color,width,antialias,alpha = alpha)
+        self.image.dl().circle((self.x,self.y),self.r,color,width,filled,antialias,alpha = alpha)
 
     def show(self, color = Color.GREEN):
         """
