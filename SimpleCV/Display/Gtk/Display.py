@@ -1,9 +1,11 @@
 from ..Base import Display
+from SimpleCV.base import *
 from ..Base.Display import DisplayBase
 from ..Base import Line
 from ..Base import DisplayNotFoundException
 from Worker import GtkWorker
 from multiprocessing import Pipe
+import numpy as np
 
 
 class GtkDisplay(Display.DisplayBase):
@@ -115,10 +117,14 @@ class GtkDisplay(Display.DisplayBase):
             
             dic = {}
             dic['function'] = 'showImage'
+            if img.dtype != np.dtype('uint8') and img.dtype != np.dtype('uint16') and img.dtype != np.dtype('float32'):
+                warnings.warn('Only uint8, uint16 and float32 images are supported as of now')
+                return
             try:
-                dic['data'] = img.toRGB().getNumpy()
+                dic['data'] = img.toRGB().getNumpy()                
             except:
                 dic['data'] = img.getNumpy()
+            
             dic['depth'] = img.depth
             dic['width'] = img.width
             dic['height'] = img.height

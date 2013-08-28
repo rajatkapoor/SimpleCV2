@@ -973,7 +973,7 @@ class TemplateMatch(Feature):
 
         Nothing - this is an inplace operation that modifies the source images drawing layer.
         """
-        self.image.dl().rectangle((self.x,self.y), (self.width(), self.height()), color = color, width=width,antialias,alpha = alpha)
+        self.image.dl().rectangle((self.x,self.y), (self.width(), self.height()), color, width,antialias,alpha)
 ######################################################################
 class Circle(Feature):
     """
@@ -1022,7 +1022,7 @@ class Circle(Feature):
         Nothing - this is an inplace operation that modifies the source images drawing layer.
 
         """
-        self.image.dl().circle((self.x,self.y),self.r,color,width,filled,antialias,alpha = alpha)
+        self.image.dl().circle((self.x,self.y),self.r,color,width,filled,antialias,alpha)
 
     def show(self, color = Color.GREEN):
         """
@@ -2484,7 +2484,7 @@ class ROI(Feature):
 
         """
         x,y,w,h = self.toXYWH()
-        self.image.drawRectangle(x,y,w,h,width=width,color=color,antialias,alpha = alpha)
+        self.image.drawRectangle(x,y,w,h,width,color,antialias,alpha)
 
     def show(self, color = Color.GREEN, width=2):
         """

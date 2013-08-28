@@ -446,7 +446,7 @@ class GtkWorker(Process):
         self.imageData = data
         self.imgRealSize = (data['width'],data['height'])
         
-        self.pixbuf = self.gtk.gdk.pixbuf_new_from_array(data['data'],self.gtk.gdk.COLORSPACE_RGB, 8)
+        self.pixbuf = self.gtk.gdk.pixbuf_new_from_array(data['data'].astype(np.uint8),self.gtk.gdk.COLORSPACE_RGB, 8)
         
         # tell gtk to draw again
         self.drawingArea.queue_draw()
