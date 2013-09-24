@@ -17,7 +17,10 @@ def getPCode(img):
     for layer in img.layers():
         for shape in layer.shapes():
             code += 'stroke(%d,%d,%d,%d);' % (shape.color + (shape.alpha,))
-            code += 'strokeWeight(%d);' % shape.width
+            code += 'fill(0,0,0,0);'
+            if type(shape) is not Text:
+                code += 'strokeWeight(%d);' % shape.width
+
             if shape.antialias :
                 code += 'smooth();'
             else:
@@ -25,6 +28,17 @@ def getPCode(img):
                 
             if type(shape) is Line :
                 code += 'line(%d,%d,%d,%d);' % (shape.start + shape.stop)
+            if type(shape) is Rectangle :
+                code += 'rectMode(CORNERS);rect(%d,%d,%d,%d);' % (shape.pt1, shape.pt2)
+            if type(shape) is Circle :
+                code += 'ellipse(%d,%d,%d,%d);' % (shape.center + (shape.radius, shape.radius))
+            if type(shape) is Ellipse :
+                code += 'ellipse(%d,%d,%d,%d);' % (shape.center + shape.dimensions)
+            if type(shape) is Text:
+                code += 'f = createFont("%s",%d,true);textFont(f,%d);' % (shape.font,shape.size,shape.size)
+                code += 'text("%s",%d,%d);' % (shape.text, shape.location[0], shape.location[1])
+            #http://processing.org/tutorials/drawing/
+
     return code
 
 
